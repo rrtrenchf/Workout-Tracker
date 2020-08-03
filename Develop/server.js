@@ -9,24 +9,24 @@ const apiRoutes = require("./routes/apiRoutes")
 
 const PORT = process.env.PORT || 3000;
 
-const app = express();
+const router = express();
 
 
-app.use(logger("dev"));
+router.use(logger("dev"));
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+router.use(express.json());
 
-app.use(express.static("public"));
+router.use(express.static("public"));
 
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
 
-app.use(htmlRoutes)
-app.use(apiRoutes)
+router.use(htmlRoutes)
+router.use(apiRoutes)
 
 
 
-app.listen(PORT, () => {
+router.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });
