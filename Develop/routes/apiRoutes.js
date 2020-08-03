@@ -25,14 +25,12 @@ router.post("/api/workouts", function (req, res) {
             res.json(dbworkouts);
         });
 });
-app.put("/submit", ({ body }, res) => {
-    db.Library.findOneAndUpdate({}, { $push: { exercises: req.body } }, { new: true }))
-    .then(dbLibrary => {
-        res.json(dbLibrary);
-    })
-    .catch(err => {
-        res.json(err);
+router.put("/api/workouts/:id", ({ body }, res) => {
+    db.Workout.findOneAndUpdate({}, { $push: { exercises: req.body } })
+    .then(function (dbworkouts) {
+        res.json(dbworkouts);
     });
-  });
+});
+ 
 
 module.exports = router
